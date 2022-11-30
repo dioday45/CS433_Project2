@@ -11,3 +11,4 @@ data_full/train_pos_full.txt
 .vector_cache/glove.6B.50d.txt
 .vector_cache/glove.6B.50d.txt_20000.pt
 .vector_cache/glove.6B.zip
+*.pyc
