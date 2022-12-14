@@ -1,15 +1,29 @@
 import numpy as np
 import string
 import re
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-from nltk.tokenize import TweetTokenizer
-
-tweet_tokenizer = TweetTokenizer()
-lemmatizer = WordNetLemmatizer()
-stopwords = set(stopwords.words('english'))
+import nltk
+import pandas as pd
+from tqdm import tqdm
+tqdm.pandas()
+nltk.download('words')
 
 UNWANTED_WORDS = ['user', 'url', 'rt']
+
+USEFUL_STOPWORDS = ["aint", "arent", "cannot", "cant", "couldnt", "darent", "didnt", "doesnt",
+     "ain't", "aren't", "can't", "couldn't", "daren't", "didn't", "doesn't",
+     "dont", "hadnt", "hasnt", "havent", "isnt", "mightnt", "mustnt", "neither",
+     "don't", "hadn't", "hasn't", "haven't", "isn't", "mightn't", "mustn't",
+     "neednt", "needn't", "never", "none", "nope", "nor", "not", "nothing", "nowhere",
+     "oughtnt", "shant", "shouldnt", "uhuh", "wasnt", "werent",
+     "oughtn't", "shan't", "shouldn't", "uh-uh", "wasn't", "weren't",
+     "without", "wont", "wouldnt", "won't", "wouldn't", "rarely", "seldom", "despite"]
+
+words = set(nltk.corpus.words.words())
+tweet_tokenizer = nltk.tokenize.TweetTokenizer()
+lemmatizer = nltk.stem.WordNetLemmatizer()
+stopword = set(nltk.corpus.stopwords.words('english'))
+for w in USEFUL_STOPWORDS:
+    stopword.discard(w)
 
 SLANG = {
     "$" : " dollar ",
@@ -363,3 +377,41 @@ def lemmatize(text):
 
 def unslang(text):        
     return " ".join([SLANG[word] if word in SLANG.keys() else word for word in text.split()])
+
+def remove_non_english_words(text):
+    return " ".join(w for w in nltk.wordpunct_tokenize(text) if w.lower() in words or not w.isalpha())
+
+
+def preprocess_data(df):
+    df['tweet'] = df['tweet'].progress_apply(lambda x: to_lower(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_stopwords(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_punct(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: add_space(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_white_space(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_words_digits(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_specific_words(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_repeating_char(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_single_char(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: unslang(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: lemmatize(x))
+
+
+    df = df[df['tweet'] != '']
+    df = df.drop_duplicates()
+    df.reset_index(inplace=True)
+
+    return df
+
+def preprocess_transformer(df):
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_punct(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: add_space(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_white_space(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_words_digits(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: remove_repeating_char(x))
+    df['tweet'] = df['tweet'].progress_apply(lambda x: unslang(x))
+
+    df = df[df['tweet'] != '']
+    df = df.drop_duplicates()
+    df.reset_index(inplace=True)
+
+    return df
