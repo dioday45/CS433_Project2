@@ -4,6 +4,13 @@ import re
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
+from nltk import PorterStemmer
+import nltk
+st = PorterStemmer()
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+  
 
 tweet_tokenizer = TweetTokenizer()
 lemmatizer = WordNetLemmatizer()
@@ -130,3 +137,6 @@ def lemmatize(text):
         string: text lemmatized
     """
     return " ".join([lemmatizer.lemmatize(word) for word in text.split()])
+
+def stemmatize(text):
+    return " ".join([st.stem(word) for word in text.split()])
