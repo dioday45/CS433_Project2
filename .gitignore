@@ -12,3 +12,16 @@ data_full/train_pos_full.txt
 .vector_cache/glove.6B.50d.txt_20000.pt
 .vector_cache/glove.6B.zip
 *.pyc
+.vector_cache/glove.twitter.27B.zip
+.vector_cache/glove.twitter.27B.50d.txt
+.vector_cache/glove.twitter.27B.25d.txt
+.vector_cache/glove.twitter.27B.200d.txt_1000000.pt
+.vector_cache/glove.twitter.27B.200d.txt
+.vector_cache/glove.twitter.27B.100d.txt_1000000.pt
+.vector_cache/glove.twitter.27B.100d.txt
+.vector_cache/glove.6B.200d.txt_200000.pt
+.vector_cache/glove.6B.200d.txt_20000.pt
+.vector_cache/glove.6B.200d.txt_2000.pt
+.vector_cache/glove.6B.200d.txt_1000000.pt
+.vector_cache/glove.6B.100d.txt_20000.pt
+.vector_cache/glove.6B.100d.txt_1000000.pt
