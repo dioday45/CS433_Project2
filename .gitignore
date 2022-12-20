@@ -25,3 +25,4 @@ data_full/train_neg_full.txt
 .vector_cache/glove.6B.100d.txt_20000.pt
 .vector_cache/glove.6B.100d.txt_1000000.pt
 .vector_cache/glove.6B.100d.txt
+Pretrained_model/roBERTa/pytorch_model.bin

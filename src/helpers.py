@@ -266,7 +266,7 @@ def remove_stopwords(text):
     Returns:
         string: the resulting string
     """
-    return " ".join([word for word in text.split() if word.lower() not in stopwords])
+    return " ".join([word for word in text.split() if word.lower() not in stopword])
 
 
 def remove_punct(text):
