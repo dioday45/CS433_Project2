@@ -375,10 +375,26 @@ def lemmatize(text):
     """
     return " ".join([lemmatizer.lemmatize(word) for word in text.split()])
 
-def unslang(text):        
+def unslang(text):
+    """Replace slang words by their corresponding using our SLANG dictionnary
+
+    Args:
+        text (string): text to unslang
+
+    Returns:
+        string: text without slang
+    """
     return " ".join([SLANG[word] if word in SLANG.keys() else word for word in text.split()])
 
 def remove_non_english_words(text):
+    """Remove non english word
+
+    Args:
+        text (string): text to remove non-english words
+
+    Returns:
+        string: text with only english words
+    """
     return " ".join(w for w in nltk.wordpunct_tokenize(text) if w.lower() in words or not w.isalpha())
 
 
