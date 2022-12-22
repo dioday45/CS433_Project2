@@ -1,7 +1,7 @@
 # Project Overview
 
 In this project, we developed multiple machine learning models for the purpose of conducting sentiment analysis on Twitter posts. The objective was to classify the posts as either positive or negative. 
-The models tested include BERT, RoBERTa, XLNet, TF-IDF, and Word2Vec. The performance of our best model was evaluated on the testing set, yielding an accuracy of 0.892.
+The models tested include BERT, RoBERTa, XLNet, TF-IDF, GloVe and Word2Vec. The performance of our best model was evaluated on the testing set, yielding an accuracy of 0.892.
 
 # Getting Started
 
@@ -15,6 +15,8 @@ To run the code in this project, you will need to have the following software in
   - nltk
   - transformers (for BERT, RoBERTa, and XLNet)
   - gensim (for Word2Vec, and GloVe)
+  - contractions
+  - sentencepiece (for XLNet)
   - pytorch
   - pytorch lightning
 
@@ -69,8 +71,9 @@ Python3 run.py
 # Notebook Descriptions
 
 - `bert.ipynb`: This notebook contains the code for training and evaluating a BERT model on the tweet classification task.
+- `GloVE.ipynb`: This notebook contains the code for training and evaluating a model using the GlovE feature representation on the tweet classification task.
 - `roBERTa.ipynb`: This notebook contains the code for training and evaluating a RoBERTa model on the tweet classification task.
-- `XLNet.ipynb`: This notebook contains the code for training and evaluating an XLM model on the tweet classification task.
+- `XLNet.ipynb`: This notebook contains the code for training and evaluating an XLN model on the tweet classification task.
 - `TFIDF.ipynb`: This notebook contains the code for training and evaluating a model using the TF-IDF feature representation on the tweet classification task.
 - `word2Vec.ipynb`: This notebook contains the code for training and evaluating a model using the Word2Vec feature representation on the tweet classification task.
 
